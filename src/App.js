@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css'
 import Membre from './components/Membre'
+import Button from './components/Button'
 
 const league = {
   membre1: {
@@ -26,14 +27,16 @@ class App extends Component {
     league : league 
   }
 
-  handleClick = () => {
+  handleClick = (nb) => {
     const league = {...this.state.league}
-    league.membre1.age += 1
+    league.membre1.age += nb
     this.setState({league:league})
   }
 
   render() { 
     const {title} = this.props
+    const nb = 2
+
     return(
         <Fragment>
           <div className="App">
@@ -59,7 +62,11 @@ class App extends Component {
           nom="Ace"> 
           Je suis le batdog
             </Membre>
-            <button onClick={this.handleClick}>+1</button>
+
+           
+            <Button 
+            nb={nb}
+            vieillir={()=>this.handleClick(nb)}/>
 
         </Fragment>
       //React.createElement('div', {className: 'App'}, React.createElement('h1',null,'React App'))
