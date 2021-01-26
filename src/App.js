@@ -24,7 +24,8 @@ const league = {
 
 class App extends Component {
   state = {
-    league : league 
+    league : league ,
+    isShow: false
   }
 
   handleClick = (nb) => {
@@ -32,6 +33,13 @@ class App extends Component {
     league.membre1.age += nb
     this.setState({league:league})
   }
+
+  handleShow = () => {
+    const isShow = !this.state.isShow // retourner l'inverse (systeme de toggle)
+    this.setState({isShow})
+  }
+
+
   handleChange = (event) => {
     const league = {...this.state.league}
     const nom = event.target.value 
@@ -77,7 +85,17 @@ class App extends Component {
             <Membre
           age="2"
           nom="Ace"> 
-          Je suis le batdog
+          {/* on ne peut pas avoir de block {} à l'intérieur d'un autre block  */}
+          {
+            this.state.isShow ? <strong>Je suis le bat-dog</strong> : null
+          }
+          <button onClick={this.handleShow}>
+            {
+              this.state.isShow ? 'Cacher' : 'Montrer'
+            }
+
+          </button>
+         
             </Membre>
 
            
